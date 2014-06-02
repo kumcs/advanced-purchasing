@@ -1,0 +1,17 @@
+CREATE TABLE purchauths.purchauths
+(
+  purchauths_id serial NOT NULL,
+  purchauths_username text NOT NULL,
+  purchauths_vendor_id integer NOT NULL DEFAULT (-1),
+  purchauths_plancode_id integer NOT NULL DEFAULT (-1),
+  purchauths_costcat_id integer NOT NULL DEFAULT (-1),
+  purchauths_item_id integer NOT NULL DEFAULT (-1),
+  purchauths_expcat_id integer NOT NULL DEFAULT (-1),
+  purchauths_maxlevel numeric NOT NULL DEFAULT 0.00,
+  CONSTRAINT pk_purchauths PRIMARY KEY (purchauths_id )
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE purchauths.purchauths
+  OWNER TO admin;

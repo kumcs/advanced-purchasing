@@ -1,0 +1,27 @@
+-- Group: purchAuths
+-- Name:  detail
+-- Notes: Purchasing Authorisation Details
+--        
+--        Copyright (c) 2013 Pentuple Consulting Ltd (New Zealand) www.pentuple.co.nz
+SELECT 
+  purchauths.purchauths_id, 
+  purchauths.purchauths_username,  
+  CASE WHEN (purchauths.purchauths_vendor_id = -1) THEN 'All' ELSE vendinfo.vend_number END AS vendor, 
+  CASE WHEN (purchauths.purchauths_plancode_id = -1) THEN 'All' ELSE plancode.plancode_code END AS plancode, 
+  CASE WHEN (purchauths.purchauths_costcat_id = -1) THEN 'All' ELSE costcat.costcat_code END AS costcat,  
+  CASE WHEN (purchauths.purchauths_expcat_id = -1) THEN 'All' ELSE expcat.expcat_code END AS expcat,  
+  CASE WHEN (purchauths.purchauths_item_id = -1) THEN 'All' ELSE item.item_number END AS item, 
+  purchauths.purchauths_maxlevel
+FROM 
+  purchauths.purchauths
+  LEFT JOIN public.vendinfo ON (purchauths.purchauths_vendor_id = vendinfo.vend_id )
+  LEFT JOIN public.plancode ON (purchauths.purchauths_plancode_id = plancode.plancode_id)
+  LEFT JOIN public.costcat ON (purchauths.purchauths_costcat_id = costcat.costcat_id) 
+  LEFT JOIN public.item ON (purchauths.purchauths_item_id = item.item_id)
+  LEFT JOIN public.expcat ON (purchauths.purchauths_expcat_id = expcat_id)
+WHERE ( (1=1)
+  <? if exists("user") ?> 
+    AND purchauths_username ilike <? value("user") ?>
+  <? endif ?> 
+       )
+ORDER BY purchauths_username ASC, purchauths_maxlevel DESC;

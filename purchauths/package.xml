@@ -1,0 +1,84 @@
+<package id="purchauths"
+         name="purchauths"
+         developer="Anderson.NET New Zealand"
+         descrip="Purchasing Authorities"
+         version="1.1.1"
+         updater="2.2.4">
+  <pkgnotes>Purchasing Authorities add-on package for xTuple ERP.
+
+        This file is part of the Purchasing Authorities package for xTuple ERP,
+        
+        Copyright (c) 2013 by Pentuple Consulting New Zealand.
+        It is licensed to you under the Common Public Attribution License
+        version 1.0, the full text of which (including xTuple-specific Exhibits)
+        is available at www.xtuple.com/CPAL.  By using this software, you agree
+        to be bound by its terms.
+
+        Version:
+	1.1.0 - May 2013 Add Purchase Order email notifications (if xtConnect installed)
+	1.1.1 - June 2013 Fixed seqence Db permissions problem
+  </pkgnotes>
+
+  <prerequisite type="Query"
+                name="xTuple ERP version">
+    <query>
+      SELECT (SUBSTRING(fetchMetricText('ServerVersion') FOR 1) > '3') 
+          OR (SUBSTRING(fetchMetricText('ServerVersion') FOR 1) = '3'
+          AND SUBSTRING(fetchMetricText('ServerVersion') FROM 3 FOR 1) >= '8');
+    </query>
+    <message>
+      This version of thePurchasing Authorities package only works with xTuple ERP
+      versions 3.8.0 and greater.
+    </message>
+  </prerequisite>
+
+  <prerequisite type="license" name="xTuple Concise EULA">
+    <message>
+      &lt;p>
+        Purchasing Authorities add-on package for xTuple ERP.
+
+        This file is part of the Purchasing Authorities package for xTuple ERP,
+        
+        Copyright (c) 2013 by Pentuple Consulting New Zealand.
+        It is licensed to you under the Common Public Attribution License
+        version 1.0, the full text of which (including xTuple-specific Exhibits)
+        is available at www.xtuple.com/CPAL.  By using this software, you agree
+        to be bound by its terms.
+      &lt;/p>
+    </message>
+  </prerequisite>
+
+  <loadpriv name="ViewPurchasingAuths" module="Purchase">
+   Allowed to view Purchasing Authorizations
+  </loadpriv>  
+
+  <loadpriv name="MaintainPurchasingAuths" module="Purchase">
+   Allowed to create and maintain Purchasing Authorizations
+  </loadpriv>
+
+  <script file="database/misc/schemacomment.sql" />
+
+  <createtable file="database/tables/purchauths.sql"          name="purchauths"/>
+
+  <createfunction file="database/functions/releasepurchaseorder.sql"          name="releasepurchaseorder"/>
+  <createfunction file="database/functions/returnitempurchasingauth.sql"          name="returnitempurchasingauth"/>
+  <createfunction file="database/functions/returnpurchasingauth.sql"          name="returnpurchasingauth"/>
+  <createfunction file="database/functions/emailnotify.sql"          name="emailnotify"/>
+
+  <loadappscript file="client/scripts/purchauth.js"    name="purchauth" order="0">Purchasing Auths</loadappscript>
+  <loadappscript file="client/scripts/postPurchaseOrdersByAgent.js"              name="postPurchaseOrdersByAgent"     order="0">Purchasing Auths</loadappscript> 
+  <loadappscript file="client/scripts/postPurchaseOrder.js" name="postPurchaseOrder"     order="0">Purchasing Auths</loadappscript>
+  <loadappscript file="client/scripts/configurePO.js"       name="configurePO" order="0">Purchasing Auths</loadappscript>
+  <loadappscript file="client/scripts/initMenu.js"    name="initMenu" order="0">Purchasing Auths</loadappscript>
+  <loadappscript file="client/scripts/purchauthsList.js"    name="purchauthsList" order="0">Purchasing Auths</loadappscript>
+  <loadappscript file="client/scripts/purchauths.js"    name="purchauths" order="0">Purchasing Auths</loadappscript>
+  <loadappscript file="client/scripts/printPurchaseOrder.js"    name="printPurchaseOrder" order="0">Purchasing Auths</loadappscript>
+  <loadappscript file="client/scripts/purchaseOrder.js"    name="purchaseOrder" order="0">Purchasing Auths</loadappscript>
+  <loadappscript file="client/scripts/unpostedPurchaseOrders.js"    name="unpostedPurchaseOrders" order="0">Purchasing Auths</loadappscript>
+
+  <loadappui file="client/uiforms/purchauths.ui"       order="0">Purchasing Auths</loadappui>
+  <loadappui file="client/uiforms/purchauthsList.ui"   order="0">Purchasing Auths</loadappui>
+  
+  <loadmetasql file="client/metasql/purchAuths-detail.mql">Purchasing Auths</loadmetasql>
+
+</package>
