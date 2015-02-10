@@ -21,13 +21,14 @@ _delete.enabled = privileges.check("MaintainPurchasingAuths");
 // Create List
 with (_levels)
 {
-  addColumn("User",  -1, 1, true, "purchauths_username");
-  addColumn("Vendor",  -1, 1, true, "vendor");
-  addColumn("Planner Code",  -1, 1, true, "plancode");
-  addColumn("Cost Category",  -1, 1, true, "costcat");
-  addColumn("Item",  -1, 1, true, "item");
-  addColumn("Expense Category",  -1, 1, true, "expcat");
-  addColumn("Purchasing Level",  -1, 1, true, "purchauths_maxlevel");
+  addColumn(qsTr("User"),  -1, 1, true, "purchauths_username");
+  addColumn(qsTr("Vendor"),  -1, 1, true, "vendor");
+  addColumn(qsTr("Planner Code"),  -1, 1, true, "plancode");
+  addColumn(qsTr("Cost Category"),  -1, 1, true, "costcat");
+  addColumn(qsTr("Item"),  -1, 1, true, "item");
+  addColumn(qsTr("Expense Category"),  -1, 1, true, "expcat");
+  addColumn(qsTr("Purchasing Limit"),  -1, 1, true, "purchauths_maxlevel");
+  addColumn(qsTr("Monthly Limit"),  -1, 1, true, "purchauths_maxlevel_monthly");
 }
 
 fillList();
@@ -87,7 +88,7 @@ function authEdit()
 { 
  if (_levels.id() == -1)
  {
-  QMessageBox.warning(mywindow, mywindow.windowTitle, "You must select a line first");
+  QMessageBox.warning(mywindow, mywindow.windowTitle, qsTr("You must select a line first"));
   return 0;
  }
  authOpen(1,_levels.id());
@@ -97,7 +98,7 @@ function authDelete()
 {
  if (_levels.id() == -1)
  {
-  QMessageBox.warning(mywindow, mywindow.windowTitle, "You must select a Purchasing Authorisation first");
+  QMessageBox.warning(mywindow, mywindow.windowTitle, qsTr("You must select a Purchasing Authorisation first"));
   return 0;
  }
   var dparam = new Object();

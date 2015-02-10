@@ -2,7 +2,7 @@
 -- Name:  detail
 -- Notes: Purchasing Authorisation Details
 --        
---        Copyright (c) 2013 Pentuple Consulting Ltd (New Zealand) www.pentuple.co.nz
+--        Copyright (c) 2013-2015 Pentuple Consulting Ltd (New Zealand) www.pentuple.co.nz
 SELECT 
   purchauths.purchauths_id, 
   purchauths.purchauths_username,  
@@ -11,7 +11,8 @@ SELECT
   CASE WHEN (purchauths.purchauths_costcat_id = -1) THEN 'All' ELSE costcat.costcat_code END AS costcat,  
   CASE WHEN (purchauths.purchauths_expcat_id = -1) THEN 'All' ELSE expcat.expcat_code END AS expcat,  
   CASE WHEN (purchauths.purchauths_item_id = -1) THEN 'All' ELSE item.item_number END AS item, 
-  purchauths.purchauths_maxlevel
+  purchauths.purchauths_maxlevel,
+  purchauths.purchauths_maxlevel_monthly
 FROM 
   purchauths.purchauths
   LEFT JOIN public.vendinfo ON (purchauths.purchauths_vendor_id = vendinfo.vend_id )

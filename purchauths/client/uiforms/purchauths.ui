@@ -14,7 +14,7 @@ to be bound by its terms.</comment>
     <x>0</x>
     <y>0</y>
     <width>523</width>
-    <height>312</height>
+    <height>348</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -25,10 +25,20 @@ to be bound by its terms.</comment>
     <layout class="QHBoxLayout" name="horizontalLayout_2">
      <item>
       <layout class="QGridLayout" name="gridLayout_2">
-       <item row="0" column="0">
-        <widget class="XLabel" name="_agentLit">
+       <item row="8" column="0">
+        <widget class="XLabel" name="_levelLit">
+         <property name="toolTip">
+          <string>Purchasing Limit (per Purchase Order)</string>
+         </property>
          <property name="text">
-          <string>Purchasing Agent:</string>
+          <string>Purchasing Limit:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="VendorCluster" name="_vendor">
+         <property name="nullStr">
+          <string>All</string>
          </property>
         </widget>
        </item>
@@ -43,22 +53,6 @@ to be bound by its terms.</comment>
         <widget class="XLabel" name="_itemLit">
          <property name="text">
           <string>Item:</string>
-         </property>
-        </widget>
-       </item>
-       <item row="4" column="1">
-        <widget class="XComboBox" name="_costcat">
-         <property name="focusPolicy">
-          <enum>Qt::StrongFocus</enum>
-         </property>
-         <property name="allowNull">
-          <bool>true</bool>
-         </property>
-         <property name="nullStr">
-          <string>All</string>
-         </property>
-         <property name="type">
-          <enum>XComboBox::CostCategories</enum>
          </property>
         </widget>
        </item>
@@ -85,47 +79,6 @@ to be bound by its terms.</comment>
           </spacer>
          </item>
         </layout>
-       </item>
-       <item row="2" column="1">
-        <widget class="VendorCluster" name="_vendor">
-         <property name="nullStr">
-          <string>All</string>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="1">
-        <widget class="XComboBox" name="_plancode">
-         <property name="allowNull">
-          <bool>true</bool>
-         </property>
-         <property name="nullStr">
-          <string>All</string>
-         </property>
-         <property name="type">
-          <enum>XComboBox::PlannerCodes</enum>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="0">
-        <widget class="XLabel" name="_vendorLit">
-         <property name="text">
-          <string>Vendor:</string>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="0">
-        <widget class="XLabel" name="_plancodeLit">
-         <property name="text">
-          <string>Planner Code:</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="1">
-        <widget class="XComboBox" name="_user">
-         <property name="type">
-          <enum>XComboBox::Agent</enum>
-         </property>
-        </widget>
        </item>
        <item row="8" column="1">
         <layout class="QHBoxLayout" name="horizontalLayout_3">
@@ -160,10 +113,60 @@ to be bound by its terms.</comment>
          </item>
         </layout>
        </item>
-       <item row="8" column="0">
-        <widget class="XLabel" name="_levelLit">
+       <item row="0" column="0">
+        <widget class="XLabel" name="_agentLit">
          <property name="text">
-          <string>Purchasing Level:</string>
+          <string>Purchasing Agent:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="1">
+        <widget class="XComboBox" name="_costcat">
+         <property name="focusPolicy">
+          <enum>Qt::StrongFocus</enum>
+         </property>
+         <property name="allowNull">
+          <bool>true</bool>
+         </property>
+         <property name="nullStr">
+          <string>All</string>
+         </property>
+         <property name="type">
+          <enum>XComboBox::CostCategories</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1">
+        <widget class="XComboBox" name="_plancode">
+         <property name="allowNull">
+          <bool>true</bool>
+         </property>
+         <property name="nullStr">
+          <string>All</string>
+         </property>
+         <property name="type">
+          <enum>XComboBox::PlannerCodes</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="XLabel" name="_vendorLit">
+         <property name="text">
+          <string>Vendor:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <widget class="XLabel" name="_plancodeLit">
+         <property name="text">
+          <string>Planner Code:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="XComboBox" name="_user">
+         <property name="type">
+          <enum>XComboBox::Agent</enum>
          </property>
         </widget>
        </item>
@@ -203,6 +206,43 @@ to be bound by its terms.</comment>
           <string>Expense Category</string>
          </property>
         </widget>
+       </item>
+       <item row="9" column="0">
+        <widget class="XLabel" name="_monthlyLit">
+         <property name="text">
+          <string>Monthly Limit:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="9" column="1">
+        <layout class="QHBoxLayout" name="horizontalLayout_4">
+         <item>
+          <widget class="CurrCluster" name="_monthly">
+           <property name="baseVisible">
+            <bool>false</bool>
+           </property>
+           <property name="currencyDisabled">
+            <bool>true</bool>
+           </property>
+           <property name="currencyVisible">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_4">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
        </item>
       </layout>
      </item>
@@ -269,6 +309,7 @@ to be bound by its terms.</comment>
          </property>
         </spacer>
        </item>
+       <item/>
       </layout>
      </item>
     </layout>
@@ -291,43 +332,41 @@ to be bound by its terms.</comment>
  <customwidgets>
   <customwidget>
    <class>CurrCluster</class>
-   <extends>CurrDisplay</extends>
-   <header>currcluster.h</header>
-  </customwidget>
-  <customwidget>
-   <class>CurrDisplay</class>
    <extends></extends>
    <header>currcluster.h</header>
   </customwidget>
   <customwidget>
    <class>ItemLineEdit</class>
-   <extends>XLineEdit</extends>
+   <extends></extends>
    <header>itemlineedit.h</header>
   </customwidget>
   <customwidget>
    <class>VendorCluster</class>
-   <extends>QWidget</extends>
+   <extends></extends>
    <header>vendorcluster.h</header>
   </customwidget>
   <customwidget>
    <class>XComboBox</class>
-   <extends>QComboBox</extends>
+   <extends></extends>
    <header>xcombobox.h</header>
   </customwidget>
   <customwidget>
    <class>XLabel</class>
-   <extends></extends>
+   <extends>QLabel</extends>
    <header>xlabel.h</header>
-  </customwidget>
-  <customwidget>
-   <class>XLineEdit</class>
-   <extends></extends>
-   <header>xlineedit.h</header>
   </customwidget>
  </customwidgets>
  <tabstops>
+  <tabstop>_user</tabstop>
+  <tabstop>_selItem</tabstop>
+  <tabstop>_selExpense</tabstop>
+  <tabstop>_vendor</tabstop>
+  <tabstop>_plancode</tabstop>
   <tabstop>_costcat</tabstop>
   <tabstop>_item</tabstop>
+  <tabstop>_expcat</tabstop>
+  <tabstop>_level</tabstop>
+  <tabstop>_monthly</tabstop>
   <tabstop>_save</tabstop>
   <tabstop>_close</tabstop>
  </tabstops>

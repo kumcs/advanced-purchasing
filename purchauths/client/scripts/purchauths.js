@@ -7,6 +7,7 @@ var _costcat = mywindow.findChild("_costcat");
 var _expcat = mywindow.findChild("_expcat");
 var _item = mywindow.findChild("_item");
 var _level = mywindow.findChild("_level");
+var _monthly = mywindow.findChild("_monthly");
 
 var _selItem = mywindow.findChild("_selItem");
 var _selExpense = mywindow.findChild("_selExpense");
@@ -21,6 +22,7 @@ var _viewMode = 2;
 _close.clicked.connect(close);
 _save.clicked.connect(saveAuth);
 _level["editingFinished()"].connect(setButtons);
+_monthly["editingFinished()"].connect(setButtons);
 _selItem.clicked.connect(setWidgets);
 _selExpense.clicked.connect(setWidgets);
 
@@ -37,14 +39,20 @@ function saveAuth()
   if (!checkData())
     return false;
 
+  if (_monthly.baseValue < _level.baseValue) {
+    QMessageBox.information(mywindow, qsTr("Incorrect Data"), qsTr("You must enter a monthly limit equal or higher than the individual P/O limit."));
+    _monthly.setFocus();
+    return false;
+  }
+
   if (_mode == _newMode)
   {
-    var sql="INSERT INTO purchauths.purchauths (purchauths_username, purchauths_vendor_id, purchauths_plancode_id, purchauths_costcat_id, purchauths_expcat_id, purchauths_item_id, purchauths_maxlevel) "
-	+ " VALUES (<? value(\"user\") ?>, <? value(\"vendor\") ?>,<? value(\"plancode\") ?>, <? value(\"costcat\") ?>, <? value(\"expcat\") ?>, <? value(\"item\") ?>, <? value(\"level\") ?>)";
+    var sql="INSERT INTO purchauths.purchauths (purchauths_username, purchauths_vendor_id, purchauths_plancode_id, purchauths_costcat_id, purchauths_expcat_id, purchauths_item_id, purchauths_maxlevel, purchauths_maxlevel_monthly) "
+	+ " VALUES (<? value('user') ?>, <? value('vendor') ?>,<? value('plancode') ?>, <? value('costcat') ?>, <? value('expcat') ?>, <? value('item') ?>, <? value('level') ?>, <? value('monthly') ?>)";
   } else {
-    var sql="UPDATE purchauths.purchauths SET purchauths_vendor_id=<? value(\"vendor\") ?>, purchauths_plancode_id=<? value(\"plancode\") ?>, "
-	+ "  purchauths_costcat_id=<? value(\"costcat\") ?>, purchauths_expcat_id=<? value(\"expcat\") ?>, purchauths_item_id=<? value(\"item\") ?>, "
-	+ " purchauths_maxlevel=<? value(\"level\") ?> WHERE purchauths_id=<? value(\"id\") ?>";
+    var sql="UPDATE purchauths.purchauths SET purchauths_vendor_id=<? value('vendor') ?>, purchauths_plancode_id=<? value('plancode') ?>, "
+	+ "  purchauths_costcat_id=<? value('costcat') ?>, purchauths_expcat_id=<? value('expcat') ?>, purchauths_item_id=<? value('item') ?>, "
+	+ " purchauths_maxlevel=<? value('level') ?>, purchauths_maxlevel_monthly=<? value('monthly') ?> WHERE purchauths_id=<? value('id') ?>";
   }  
   try
   {
@@ -67,6 +75,7 @@ function checkData()
   if (_level.baseValue <= 0)
     return false;
 
+
   return true;
 }
 
@@ -81,6 +90,7 @@ function getParams()
   p.plancode = _plancode.id();
   p.item = _item.id();
   p.level = _level.baseValue;
+  p.monthly = _monthly.baseValue;
 
   return p;
 }
@@ -118,9 +128,16 @@ function populate(id)
    _expcat.setId(data.value("purchauths_expcat_id"));
    _plancode.setId(data.value("purchauths_plancode_id"));
    _item.setId(data.value("purchauths_item_id"));
-   _level.localValue = data.value("purchauths_maxlevel");
+   _level.baseValue = data.value("purchauths_maxlevel");
+   _monthly.baseValue = data.value("purchauths_maxlevel_monthly");
    _user.setEnabled(false);
 
+   if (_item.id() > 0)
+     _selItem.setChecked(true)
+   else
+     _selExpense.setChecked(true);   
+
+   setWidgets();
    setButtons();
   }
 }
