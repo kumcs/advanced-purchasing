@@ -8,7 +8,7 @@ SELECT xt.add_column('purchauths', 'purchauths_costcat_id', 'integer', 'NOT NULL
 SELECT xt.add_column('purchauths', 'purchauths_item_id', 'integer', 'NOT NULL DEFAULT (-1)', 'purchauths', null);
 SELECT xt.add_column('purchauths', 'purchauths_expcat_id', 'integer', 'NOT NULL DEFAULT (-1)', 'purchauths', null);
 SELECT xt.add_column('purchauths', 'purchauths_maxlevel', 'numeric', 'NOT NULL DEFAULT 0.00', 'purchauths', null);
-SELECT xt.add_column('purchauths', 'purchauths_maxlevel_monthlyl', 'numeric', 'NOT NULL DEFAULT 0.00', 'purchauths', null);
+SELECT xt.add_column('purchauths', 'purchauths_maxlevel_monthly', 'numeric', 'NOT NULL DEFAULT 0.00', 'purchauths', null);
 
 SELECT xt.add_constraint('purchauths', 'pk_purchauths', 'PRIMARY KEY (purchauths_id)', 'purchauths');
 
