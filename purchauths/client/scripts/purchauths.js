@@ -8,6 +8,7 @@ var _expcat = mywindow.findChild("_expcat");
 var _item = mywindow.findChild("_item");
 var _level = mywindow.findChild("_level");
 var _monthly = mywindow.findChild("_monthly");
+var _stack = mywindow.findChild("_stack");
 
 var _selItem = mywindow.findChild("_selItem");
 var _selExpense = mywindow.findChild("_selExpense");
@@ -85,10 +86,18 @@ function getParams()
   p.id = _id;
   p.user = _user.text;
   p.vendor = _vendor.id();
-  p.costcat = _costcat.id();
-  p.expcat = _expcat.id();
-  p.plancode = _plancode.id();
-  p.item = _item.id();
+  if (_selExpense.checked)
+  {
+    p.expcat = _expcat.id();
+    p.item = -1;
+  }
+  if (_selItem.checked)
+  {
+    p.costcat = _costcat.id();
+    p.plancode = _plancode.id();
+    p.item = _item.id();
+    p.expcat = -1;
+  }
   p.level = _level.baseValue;
   p.monthly = _monthly.baseValue;
 
@@ -107,6 +116,11 @@ function prepare()
 
 function setWidgets()
 {
+  if (_selItem.checked)
+    _stack.setCurrentIndex(0);
+  else
+    _stack.setCurrentIndex(1);
+
   _plancode.enabled = _selItem.checked;
   _costcat.enabled = _selItem.checked;
   _item.enabled = _selItem.checked;

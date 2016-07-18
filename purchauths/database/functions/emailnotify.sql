@@ -23,7 +23,7 @@ BEGIN
     SELECT TRIM(cntct_email) INTO _email
 	FROM cntct
 	JOIN emp ON (cntct_id=emp_cntct_id)
-	WHERE emp_id = (select emp_mgr_emp_id FROM emp WHERE emp_code=geteffectivextuser());
+	WHERE emp_id = (select emp_mgr_emp_id FROM emp WHERE UPPER(emp_code)=UPPER(geteffectivextuser()));
 
     IF (FOUND) THEN
       SELECT order_number, order_date, purchasing_agent, vendor_number INTO _row 
