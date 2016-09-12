@@ -1,3 +1,5 @@
+include("purchauth");
+
 var _user = mywindow.findChild("_user");
 var _close = mywindow.findChild("_close");
 var _levels = mywindow.findChild("_levels");
@@ -7,7 +9,7 @@ var _edit = mywindow.findChild("_edit");
 var _delete = mywindow.findChild("_delete");
 
 // connections
-_close.clicked.connect(close);
+_close.clicked.connect(mywindow.close);
 _new.clicked.connect(authNew);
 _edit.clicked.connect(authEdit);
 _delete.clicked.connect(authDelete);
@@ -18,7 +20,6 @@ _new.enabled = privileges.check("MaintainPurchasingAuths");
 _edit.enabled = privileges.check("MaintainPurchasingAuths");
 _delete.enabled = privileges.check("MaintainPurchasingAuths");
 
-// Create List
 with (_levels)
 {
   addColumn(qsTr("User"),  -1, 1, true, "purchauths_username");
@@ -62,45 +63,33 @@ if(pMenu != null)
 
 function fillList()
 {
- try
- {
-  data = toolbox.executeDbQuery("purchAuths", "detail", getParams());
+  var data = toolbox.executeDbQuery("purchAuths", "detail", getParams());
+  purchauth.errorCheck(data);
   _levels.populate(data);
- }
- catch(e)
- {
-   print(e);
-   QMessageBox.critical(mywindow, "Database Error", "Db Error: " + e);
- }
-}
-
-function close()
-{
-  mywindow.close();
 }
 
 function authNew()
 {
- authOpen(0,0);
+  authOpen(0,0);
 }
 
 function authEdit()
 { 
- if (_levels.id() == -1)
- {
-  QMessageBox.warning(mywindow, mywindow.windowTitle, qsTr("You must select a line first"));
-  return 0;
- }
- authOpen(1,_levels.id());
+  if (_levels.id() == -1)
+  {
+    QMessageBox.warning(mywindow, mywindow.windowTitle, qsTr("You must select a line first"));
+    return 0;
+  }
+  authOpen(1,_levels.id());
 }
 
 function authDelete()
 {
- if (_levels.id() == -1)
- {
-  QMessageBox.warning(mywindow, mywindow.windowTitle, qsTr("You must select a Purchasing Authorisation first"));
-  return 0;
- }
+  if (_levels.id() == -1)
+  {
+    QMessageBox.warning(mywindow, mywindow.windowTitle, qsTr("You must select a Purchasing Authorisation first"));
+    return 0;
+  }
   var dparam = new Object();
   dparam.id = _levels.id();
   var data = toolbox.executeQuery('DELETE FROM purchauths.purchauths WHERE purchauths_id = <? value("id") ?>', dparam);
@@ -128,9 +117,11 @@ function authOpen(mode, number)
 
 function getParams()
 {
- var par = new Object();
+ var param = new Object;
  if (_user.text.length != 0)
-   par.user = "%"+_user.text+"%";
+   param.user = "%"+_user.text+"%";
 
- return par;
+ param.na = qsTr("N/A");
+
+ return param;
 }

@@ -5,7 +5,8 @@ if (metrics.boolean("UsePurchasingAuths"))
   var purchasingMenu = mainwindow.findChild("menu.purch.orders");
 
   tmpaction = purchasingMenu.addAction(qsTranslate("menuPurchase", "Purchasing Authorizations..."));
-  tmpaction.enabled = (privileges.value("MaintainPurchasingAuths") || privileges.value("ViewPurchasingAuths"));
+  if (privileges.value("MaintainPurchasingAuths") || privileges.value("ViewPurchasingAuths"))
+    tmpaction.enabled = true;
   tmpaction.setData("purchauthsList");
   tmpaction.objectName = "pu.purchauths";
   tmpaction.triggered.connect(sPurchasingAuths);
