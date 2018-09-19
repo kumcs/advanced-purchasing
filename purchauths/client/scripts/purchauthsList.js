@@ -14,7 +14,7 @@ _new.clicked.connect(authNew);
 _edit.clicked.connect(authEdit);
 _delete.clicked.connect(authDelete);
 _user["textChanged(QString)"].connect(fillList);
-mainwindow["salesOrdersUpdated(int, bool)"].connect(fillList);
+mainwindow["purchaseOrdersUpdated(int, bool)"].connect(fillList);
 
 _new.enabled = privileges.check("MaintainPurchasingAuths");
 _edit.enabled = privileges.check("MaintainPurchasingAuths");

@@ -27,6 +27,7 @@ _monthly["editingFinished()"].connect(setButtons);
 _selItem.clicked.connect(setWidgets);
 _selExpense.clicked.connect(setWidgets);
 
+_selItem.setChecked(true);
 setButtons();
 setWidgets()
 
@@ -49,16 +50,16 @@ function saveAuth()
   if (_mode == _newMode)
   {
     var sql="INSERT INTO purchauths.purchauths (purchauths_username, purchauths_vendor_id, purchauths_plancode_id, purchauths_costcat_id, purchauths_expcat_id, purchauths_item_id, purchauths_maxlevel, purchauths_maxlevel_monthly) "
-	+ " VALUES (<? value('user') ?>, <? value('vendor') ?>,<? value('plancode') ?>, <? value('costcat') ?>, <? value('expcat') ?>, <? value('item') ?>, <? value('level') ?>, <? value('monthly') ?>)";
+	+ " VALUES (<? value('user') ?>, <? value('vendor') ?>,COALESCE(<? value('plancode') ?>, -1), COALESCE(<? value('costcat') ?>, -1), <? value('expcat') ?>, <? value('item') ?>, <? value('level') ?>, <? value('monthly') ?>)";
   } else {
-    var sql="UPDATE purchauths.purchauths SET purchauths_vendor_id=<? value('vendor') ?>, purchauths_plancode_id=<? value('plancode') ?>, "
-	+ "  purchauths_costcat_id=<? value('costcat') ?>, purchauths_expcat_id=<? value('expcat') ?>, purchauths_item_id=<? value('item') ?>, "
+    var sql="UPDATE purchauths.purchauths SET purchauths_vendor_id=<? value('vendor') ?>, purchauths_plancode_id=COALESCE(<? value('plancode') ?>, -1), "
+	+ "  purchauths_costcat_id=COALESCE(<? value('costcat') ?>, -1), purchauths_expcat_id=<? value('expcat') ?>, purchauths_item_id=<? value('item') ?>, "
 	+ " purchauths_maxlevel=<? value('level') ?>, purchauths_maxlevel_monthly=<? value('monthly') ?> WHERE purchauths_id=<? value('id') ?>";
   }  
   try
   {
     var d=toolbox.executeQuery(sql, getParams());
-    mainwindow.sSalesOrdersUpdated(-1);
+    mainwindow.sPurchaseOrdersUpdated(-1, true);
     close();
   }
   catch(e)
@@ -86,6 +87,7 @@ function getParams()
   p.id = _id;
   p.user = _user.text;
   p.vendor = _vendor.id();
+
   if (_selExpense.checked)
   {
     p.expcat = _expcat.id();
@@ -120,11 +122,6 @@ function setWidgets()
     _stack.setCurrentIndex(0);
   else
     _stack.setCurrentIndex(1);
-
-  _plancode.enabled = _selItem.checked;
-  _costcat.enabled = _selItem.checked;
-  _item.enabled = _selItem.checked;
-  _expcat.enabled = !_selItem.checked;
 }
 
 function populate(id)

@@ -2,14 +2,14 @@
          name="purchauths"
          developer="Pentuple Consulting New Zealand (www.pentuple.co.nz)"
          descrip="Purchasing Authorities"
-         version="1.3.2"
+         version="1.3.3"
          updater="2.2.4">
   <pkgnotes>Purchasing Advanced Authorities add-on package for xTuple ERP.
 
         This file is part of the Purchasing Advanced Authorities package for xTuple ERP,
         
         Copyright (c) 2013-2016 by Pentuple Consulting New Zealand (www.pentuple.co.nz).
-        Copyright (c) 2015-2016 by xTuple ERP (www.xtuple.org).
+        Copyright (c) 2015-2018 by xTuple ERP (www.xtuple.org).
         It is licensed to you under the Common Public Attribution License
         version 1.0, the full text of which (including xTuple-specific Exhibits)
         is available at www.xtuple.com/CPAL.  By using this software, you agree
@@ -21,6 +21,7 @@
 	1.2.0 - Feb 2015 Added Monthly Spend Limits (and recording of P/O Release user)
         1.3.0 - Apr 2016 Prevent editing unit prices on Release PO without privilege
         1.3.1/2 - Various tidyups and install bugfixes
+        1.3.3 - Tidy up screens and fix bugs
   </pkgnotes>
 
   <prerequisite type="Query"
@@ -53,7 +54,7 @@
         This file is part of the Purchasing Authorities package for xTuple ERP,
         
         Copyright (c) 2013-2016 by Pentuple Consulting New Zealand (www.pentuple.co.nz).
-        Copyright (c) 2015-2016 by xTuple ERP (www.xtuple.org).
+        Copyright (c) 2015-2018 by xTuple ERP (www.xtuple.org).
         It is licensed to you under the Common Public Attribution License
         version 1.0, the full text of which (including xTuple-specific Exhibits)
         is available at www.xtuple.com/CPAL.  By using this software, you agree

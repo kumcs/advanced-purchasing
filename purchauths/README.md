@@ -1,8 +1,14 @@
-# Purchasing Advanced Authorities Package
+# Advanced Purchasing Authorities Package
 
 Purchasing Advanced Authorities add-on package for xTuple ERP. This package was originally copyright (c) 2013-2016 by Pentuple Consulting New Zealand (www.pentuple.co.nz) and later copyright (c) 2015-2018 by xTuple ERP (www.xtuple.org).
 
 ## Details
+
+The purpose of the package is to prevent the release of Purchase Orders unless the purchasing agent has the appropriate purchase authority level.  Standard xTuple has a single privilege to allow/not-allow releasing P/Os.
+
+Purchase authority limits are set for each purchasing agent and can be based on a combination of item or expense category.  Limits can be tied to a specific vendor.  You can also use groups rather than specific items and restrict by planner code/cost category and is based on the value of items on a P/O.  Authorities are checked when attempting to release a P/O.  If the agent has an authority level that meets the item value of the P/O, the order can be released otherwise a warning message is displayed and the order is not released.
+
+It is also possible to send an email notification to the P/O creator's manager if that is properly configured, AND xtConnect is also installed.
 
 Version history:
 
