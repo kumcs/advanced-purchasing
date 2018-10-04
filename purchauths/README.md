@@ -1,7 +1,6 @@
+# Advanced Purchasing Authorities Package
 <details>
-# <summary>Advanced Purchasing Authorities Package</summary>
-
-Purchasing Advanced Authorities add-on package for xTuple ERP. This package was originally copyright (c) 2013-2016 by Pentuple Consulting New Zealand (www.pentuple.co.nz) and later copyright (c) 2015-2018 by xTuple ERP (www.xtuple.org).
+<summary>Purchasing Advanced Authorities add-on package for xTuple ERP.</summary> This package was originally copyright (c) 2013-2016 by Pentuple Consulting New Zealand (www.pentuple.co.nz) and later copyright (c) 2015-2018 by xTuple ERP (www.xtuple.org).
 
 ## Details
 
